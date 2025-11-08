@@ -97,6 +97,7 @@
 
 ```
 password-analyzer/
+├── images/             # зберіга картинки  
 ├── index.html          # HTML структура застосунку
 ├── style.css           # Стилі та оформлення
 ├── script.js           # Логіка аналізу паролів
