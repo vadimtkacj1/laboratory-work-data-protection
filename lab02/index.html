@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лабораторна робота №2 - Порівняльний аналіз класичних шифрів</title>
     <link rel="stylesheet" href="style.css">
+<<<<<<< HEAD
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+=======
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+>>>>>>> 7bb6a037622aaf5f3b58404ca232173012e5be10
 </head>
 <body>
     <div class="container">
         <header>
+<<<<<<< HEAD
             <h1>🔐 Порівняльний аналіз класичних шифрів</h1>
             <p class="subtitle">Демонстрація та порівняння алгоритмів шифрування Цезаря, Віженера та ROT13</p>
         </header>
@@ -23,11 +28,40 @@
                     rows="3"
                     required
                 ></textarea>
+=======
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>Порівняльний аналіз класичних шифрів</h1>
+                    <p class="subtitle">Демонстрація та порівняння алгоритмів шифрування Цезаря та Віженера</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="input-section">
+            <div class="section-title">
+                <h2>Налаштування шифрування</h2>
+            </div>
+            
+            <div class="form-group">
+                <label for="textToEncrypt">Текст для шифрування *</label>
+                <div class="input-wrapper">
+                    <textarea 
+                        id="textToEncrypt" 
+                        placeholder="Введіть текст для шифрування (мінімум 20-30 символів)"
+                        rows="4"
+                        required
+                    ></textarea>
+                    <div class="char-counter">
+                        <span id="charCount">0</span> символів
+                    </div>
+                </div>
+>>>>>>> 7bb6a037622aaf5f3b58404ca232173012e5be10
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="firstName">Ім'я</label>
+<<<<<<< HEAD
                     <input type="text" id="firstName" placeholder="Іван" />
                 </div>
                 <div class="form-group">
@@ -39,10 +73,30 @@
             <div class="form-group">
                 <label for="birthDate">Дата народження</label>
                 <input type="date" id="birthDate" />
+=======
+                    <div class="input-wrapper">
+                        <input type="text" id="firstName" placeholder="Вадим" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Прізвище *</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="lastName" placeholder="Ткаченко" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group form-group-date">
+                <label for="birthDate">Дата народження *</label>
+                <div class="input-wrapper">
+                    <input type="date" id="birthDate" value="2005-09-21" required />
+                </div>
+>>>>>>> 7bb6a037622aaf5f3b58404ca232173012e5be10
             </div>
 
             <div class="button-group">
                 <button class="btn btn-primary" id="encryptBtn">
+<<<<<<< HEAD
                     🔒 Зашифрувати текст
                 </button>
                 <button class="btn btn-secondary" id="bruteForceBtn">
@@ -50,11 +104,18 @@
                 </button>
                 <button class="btn btn-info" id="analyzeBtn">
                     📊 Порівняльний аналіз
+=======
+                    Зашифрувати текст
+                </button>
+                <button class="btn btn-secondary" id="bruteForceBtn">
+                    Brute Force аналіз
+>>>>>>> 7bb6a037622aaf5f3b58404ca232173012e5be10
                 </button>
             </div>
         </div>
 
         <div class="results-section" id="resultsSection">
+<<<<<<< HEAD
             <div class="cipher-results" id="cipherResults"></div>
             <div class="comparison-chart" id="comparisonChart"></div>
             <div class="brute-force-results" id="bruteForceResults"></div>
@@ -77,6 +138,21 @@
                 </div>
             </div>
         </div>
+=======
+            <div class="results-header">
+                <h2>Результати шифрування</h2>
+            </div>
+            <div class="cipher-results" id="cipherResults"></div>
+        </div>
+
+        <div class="analysis-section" id="analysisSection">
+            <div class="analysis-header">
+                <h2>Криптоаналіз</h2>
+            </div>
+            <div class="analysis-content" id="analysisContent"></div>
+        </div>
+
+>>>>>>> 7bb6a037622aaf5f3b58404ca232173012e5be10
     </div>
 
     <script src="script.js"></script>
