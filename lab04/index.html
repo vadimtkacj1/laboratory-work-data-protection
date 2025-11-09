@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №4 - Особистий цифровий підпис</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Система цифрових підписів</h1>
+            <p class="subtitle">Лабораторна робота №4 - Особистий цифровий підпис</p>
+        </header>
+
+        <section class="card">
+            <h2>Персональні дані</h2>
+            <div class="form-group">
+                <label for="name">Прізвище:</label>
+                <input type="text" id="name" placeholder="Наприклад: Ткаченко" value="Ткаченко">
+            </div>
+            <div class="form-group">
+                <label for="birthDate">Дата народження (ДД.ММ.РРРР):</label>
+                <input type="text" id="birthDate" placeholder="21.09.2005" value="21.09.2005">
+            </div>
+            <div class="form-group">
+                <label for="secretWord">Секретне слово:</label>
+                <input type="text" id="secretWord" placeholder="secret_word" value="secret_word">
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Генерація пари ключів</h2>
+            <button class="btn btn-primary" onclick="generateKeys()">Згенерувати пару ключів</button>
+            <div id="keysResult" class="result-box" style="display: none;">
+                <div class="key-display">
+                    <div class="key-item">
+                        <strong>Приватний ключ:</strong>
+                        <code id="privateKey"></code>
+                        <small class="warning">Не діліться цим ключем!</small>
+                    </div>
+                    <div class="key-item">
+                        <strong>Публічний ключ:</strong>
+                        <code id="publicKey"></code>
+                        <small>Можна публікувати для перевірки підписів</small>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" onclick="downloadKeys()">Завантажити ключі</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Підписання документа</h2>
+            <div class="form-group">
+                <label for="documentText">Вміст документа:</label>
+                <textarea id="documentText" rows="8" placeholder="Введіть текст документа для підписання...">Резюме: Петренко
+Дата народження: 21.09.2005
+
+Освіта: Вища технічна
+Спеціальність: Комп'ютерні науки
+Група: 6.04.122.010.22.2
+
+Навички:
+- Програмування на Python, JavaScript
+- Кібербезпека
+- Криптографія</textarea>
+            </div>
+            <button class="btn btn-primary" onclick="signDocument()" id="signBtn" disabled>Підписати документ</button>
+            <div id="signResult" class="result-box" style="display: none;">
+                <div class="info-box">
+                    <strong>Хеш документа (SHA-256):</strong>
+                    <code id="documentHash"></code>
+                </div>
+                <div class="info-box">
+                    <strong>Цифровий підпис:</strong>
+                    <code id="signature"></code>
+                </div>
+                <button class="btn btn-secondary" onclick="downloadSignature()">Завантажити підпис</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Перевірка підпису</h2>
+            <div class="form-group">
+                <label for="verifyDocumentText">Вміст документа для перевірки:</label>
+                <textarea id="verifyDocumentText" rows="8" placeholder="Введіть текст документа..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="verifyPublicKey">Публічний ключ:</label>
+                <input type="text" id="verifyPublicKey" placeholder="Введіть публічний ключ або використайте згенерований">
+            </div>
+            <div class="form-group">
+                <label for="verifySignature">Цифровий підпис:</label>
+                <input type="text" id="verifySignature" placeholder="Введіть цифровий підпис">
+            </div>
+            <button class="btn btn-success" onclick="verifySignature()">Перевірити підпис</button>
+            <div id="verifyResult" class="result-box" style="display: none;">
+                <div id="verifyStatus" class="status-box"></div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Демонстрація виявлення змін</h2>
+            <p class="info-text">Спробуйте модифікувати документ і побачити, як система виявляє зміни</p>
+            <button class="btn btn-warning" onclick="demonstrateTampering()">Демонструвати виявлення змін</button>
+            <div id="tamperResult" class="result-box" style="display: none;"></div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
