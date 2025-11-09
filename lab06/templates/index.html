@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №6 - SQL-ін'єкції</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Система пошуку студентів</h1>
+            <p class="subtitle">Лабораторна робота №6 - Демонстрація SQL-ін'єкцій</p>
+        </header>
+
+        <section class="card info-card">
+            <h2>Інформація про базу даних</h2>
+            <button class="btn btn-secondary" onclick="showDatabaseInfo()">Показати структуру БД</button>
+            <button class="btn btn-secondary" onclick="showAllStudents()">Показати всіх студентів</button>
+            <div id="dbInfo" class="result-box" style="display: none;"></div>
+            <div id="allStudents" class="result-box" style="display: none;"></div>
+        </section>
+
+        <section class="card vulnerable-card">
+            <h2>Вразлива версія</h2>
+            <div class="form-group">
+                <label for="vulnerableQuery">Пошук студентів (ім'я або email):</label>
+                <input type="text" id="vulnerableQuery" placeholder="Введіть ім'я або email...">
+                <small class="hint">Спробуйте: <code>' OR '1'='1</code> або <code>' UNION SELECT * FROM students--</code></small>
+            </div>
+            <button class="btn btn-danger" onclick="vulnerableSearch()">Пошук (вразливий)</button>
+            <div id="vulnerableResult" class="result-box" style="display: none;">
+                <div class="query-display">
+                    <strong>Виконаний SQL-запит:</strong>
+                    <code id="vulnerableSQL"></code>
+                </div>
+                <div id="vulnerableStudents"></div>
+            </div>
+        </section>
+
+        <section class="card secure-card">
+            <h2>Захищена версія</h2>
+            <div class="form-group">
+                <label for="secureQuery">Пошук студентів (ім'я або email):</label>
+                <input type="text" id="secureQuery" placeholder="Введіть ім'я або email...">
+                <small class="hint">Спробуйте ті самі атаки - вони не спрацюють!</small>
+            </div>
+            <button class="btn btn-success" onclick="secureSearch()">Пошук (захищений)</button>
+            <div id="secureResult" class="result-box" style="display: none;">
+                <div class="query-display">
+                    <strong>Виконаний SQL-запит:</strong>
+                    <code id="secureSQL"></code>
+                    <strong>Параметри:</strong>
+                    <code id="secureParams"></code>
+                </div>
+                <div id="secureStudents"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
