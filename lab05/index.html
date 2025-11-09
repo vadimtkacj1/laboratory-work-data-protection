@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №5 - Захищена електронна пошта</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Захищена електронна пошта</h1>
+            <p class="subtitle">Лабораторна робота №5 - Шифрування повідомлень</p>
+        </header>
+
+        <section class="card">
+            <h2>Персональні дані</h2>
+            <div class="form-group">
+                <label for="email">Електронна адреса:</label>
+                <input type="email" id="email" placeholder="vadym.tkachenko@hneu.net" value="vadym.tkachenko@hneu.net">
+            </div>
+            <div class="form-group">
+                <label for="name">Ім'я та прізвище (без пробілів):</label>
+                <input type="text" id="name" placeholder="Vadim Tkachenko" value="Vadim Tkachenko">
+            </div>
+            <div class="form-group">
+                <label for="year">Рік народження:</label>
+                <input type="text" id="year" placeholder="2005" value="2005">
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Генерація ключа шифрування</h2>
+            <button class="btn btn-primary" onclick="generateKey()">Згенерувати ключ</button>
+            <div id="keyResult" class="result-box" style="display: none;">
+                <div class="info-box">
+                    <strong>Ключ шифрування:</strong>
+                    <code id="encryptionKey"></code>
+                    <small>Ключ генерується на основі: email + ім'я + рік</small>
+                </div>
+                <button class="btn btn-secondary" onclick="downloadKey()">Завантажити ключ</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Шифрування повідомлення</h2>
+            <div class="form-group">
+                <label for="messageToEncrypt">Текст повідомлення:</label>
+                <textarea id="messageToEncrypt" rows="6" placeholder="Введіть текст для шифрування...">Зустрічаємося завтра о 15:00</textarea>
+            </div>
+            <button class="btn btn-primary" onclick="encryptMessage()" id="encryptBtn" disabled>Зашифрувати повідомлення</button>
+            <div id="encryptResult" class="result-box" style="display: none;">
+                <div class="info-box">
+                    <strong>Зашифроване повідомлення:</strong>
+                    <code id="encryptedMessage"></code>
+                </div>
+                <button class="btn btn-secondary" onclick="copyEncrypted()">Копіювати зашифроване</button>
+                <button class="btn btn-secondary" onclick="downloadEncrypted()">Завантажити як файл</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Розшифрування повідомлення</h2>
+            <div class="form-group">
+                <label for="encryptedInput">Зашифроване повідомлення:</label>
+                <textarea id="encryptedInput" rows="6" placeholder="Вставте зашифроване повідомлення..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="decryptKey">Ключ для розшифрування:</label>
+                <input type="text" id="decryptKey" placeholder="Введіть ключ або використайте згенерований">
+            </div>
+            <button class="btn btn-success" onclick="decryptMessage()">Розшифрувати повідомлення</button>
+            <div id="decryptResult" class="result-box" style="display: none;">
+                <div class="info-box">
+                    <strong>Розшифроване повідомлення:</strong>
+                    <div class="decrypted-text" id="decryptedMessage"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Демонстрація обміну повідомленнями</h2>
+            <p class="info-text">Симуляція безпечного обміну зашифрованими повідомленнями між користувачами</p>
+            <div class="demo-section">
+                <div class="demo-user">
+                    <h3>Користувач 1</h3>
+                    <input type="text" id="user1Name" placeholder="Ім'я" value="Vadim Tkachenko">
+                    <input type="text" id="user1Year" placeholder="Рік" value="2005">
+                    <textarea id="user1Message" rows="3" placeholder="Повідомлення">Зустрічаємося завтра о 15:00</textarea>
+                    <button class="btn btn-primary" onclick="demoEncrypt(1)">Зашифрувати</button>
+                    <div id="user1Result" class="demo-result"></div>
+                </div>
+                <div class="demo-arrow">→</div>
+                <div class="demo-user">
+                    <h3>Користувач 2 (отримувач)</h3>
+                    <small style="color: #666; display: block; margin-bottom: 10px;">Для розшифрування використовуються дані відправника (Користувач 1)</small>
+                    <textarea id="user2Encrypted" rows="3" placeholder="Зашифроване повідомлення"></textarea>
+                    <button class="btn btn-success" onclick="demoDecrypt(2)">Розшифрувати</button>
+                    <div id="user2Result" class="demo-result"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
