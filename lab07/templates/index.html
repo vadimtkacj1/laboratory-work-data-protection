@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №7 - Комплексна система захисту</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Комплексна система захисту</h1>
+            <p class="subtitle">Лабораторна робота №7 - Двоетапний захист з аналітикою</p>
+        </header>
+
+        <section class="card">
+            <h2>Персональні дані</h2>
+            <div class="form-group">
+                <label for="name">Ім'я (без пробілів):</label>
+                <input type="text" id="name" placeholder="VadimTkachenko" value="VadimTkachenko">
+            </div>
+            <div class="form-group">
+                <label for="year">Рік народження:</label>
+                <input type="text" id="year" placeholder="2005" value="2005">
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Етап 1: Захист файлу</h2>
+            <p class="info-text">Файл спочатку шифрується AES-256, потім приховується в зображенні через LSB</p>
+            <div class="form-group">
+                <label for="fileInput">Виберіть файл для захисту:</label>
+                <input type="file" id="fileInput" accept="*/*">
+            </div>
+            <div class="form-group">
+                <label for="imageInput">Виберіть зображення-контейнер:</label>
+                <input type="file" id="imageInput" accept="image/*">
+            </div>
+            <button class="btn btn-primary" onclick="protectFile()">Захистити файл</button>
+            <div id="protectResult" class="result-box" style="display: none;">
+                <div id="protectMetrics"></div>
+                <div id="protectFiles"></div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Етап 2: Відновлення файлу</h2>
+            <p class="info-text">Спочатку витягується зашифрований файл зі зображення, потім розшифровується</p>
+            <div class="form-group">
+                <label for="protectedImageInput">Виберіть захищене зображення (protected_*.png):</label>
+                <input type="file" id="protectedImageInput" accept="image/*">
+            </div>
+            <button class="btn btn-success" onclick="recoverFile()">Відновити файл</button>
+            <div id="recoverResult" class="result-box" style="display: none;">
+                <div id="recoverMetrics"></div>
+                <div id="recoverFiles"></div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Тестування цілісності</h2>
+            <p class="info-text">Автоматична перевірка повного циклу: захист → відновлення → перевірка цілісності</p>
+            <div class="form-group">
+                <label for="testFileInput">Виберіть файл для тестування:</label>
+                <input type="file" id="testFileInput" accept="*/*">
+            </div>
+            <div class="form-group">
+                <label for="testImageInput">Виберіть зображення-контейнер:</label>
+                <input type="file" id="testImageInput" accept="image/*">
+            </div>
+            <button class="btn btn-warning" onclick="testIntegrity()">Тестувати цілісність</button>
+            <div id="testResult" class="result-box" style="display: none;"></div>
+        </section>
+
+        <section class="card">
+            <h2>Аналітика та метрики</h2>
+            <button class="btn btn-secondary" onclick="loadAnalytics()">Оновити статистику</button>
+            <div id="analyticsResult" class="result-box" style="display: none;">
+                <div id="analyticsContent"></div>
+                <div id="chartsContainer"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
